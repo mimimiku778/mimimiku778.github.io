@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      span{
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline
+      }
+    </style>
+
+</head>
+
+<body>
+    URL
+<input type="text" value="https://test.com/" id="URL" size="25"><br>
+<br>
+アンカーリンクで遷移
+<a href="https://test.com/">Home</a>
+<a href="https://test.com/page1">Page1</a>
+<a href="https://test.com/page1/2">Page1-2</a>
+<a href="https://test.com/page1/2/1234">ID1234</a>
+<a href="https://test.com/page1/2/5678">ID5678</a><br>
+<br>
+ナビゲーション機能で遷移
+<span onclick="Router.Navi(Router.root)">Home</span>
+<span onclick="Router.Navi(Router.root.page1)">Page1</span>
+<span onclick="Router.Navi(Router.root.page1['2'])">Page1-2</span>
+<span onclick="Router.Navi(Router.root.page1['2'].anyPath, {page_id : '1234'})">ID1234</span>
+<span onclick="Router.Navi(Router.root.page1['2'].anyPath, {page_id : () => Math.floor(Math.random() * 10000000)})">ID rand</span>
+
+<div id="Content"></div>
+
+<script>
+
+document.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    event.preventDefault();
+     // コメントアウトしてるコードはテスト用に置き換えてます
+    //history.pushState(null, null, a.href);
+    document.getElementById('URL').value = a.href;
+    Router.run();
+  })
+});
+
+
+const Router = {
+  Start() {
+    this.run();
+    //window.addEventListener('popstate', () => this.run()
+  },
+
+  run() {
+    this.ID = {};
+    let router = this.root;
+    //let url = location.pathname;
+    let url = document.getElementById('URL').value.replace('https://test.com', '');
+
+    if (url !== '/') {
+
+      // URLの前後に含まれるスラッシュを削除して、パスごとに分解
+      let path = url.replace(/\/$/, '').slice(1).split('/');
+
+      for (let i = 0; i < path.length; i++) {
+
+        // URLオブジェクトのプロパティ名と、パスを照合
+        if (router[path[i]] !== undefined) {
+          // 一致したオブジェクト階層に移動する
+          router = router[path[i]];
+
+        // 動的なパス(anyPath)があるか
+        } else if (router.anyPath !== undefined) {
+          // anyPathに移動
+          router = router.anyPath;
+          // 値を保存（プロパティ名 = プレイスホルダー名）
+          this.ID[router.path.replace(/.*:/, '')] = path[i];
+
+        } else {
+          this.notFound();
+          return;
+        }
+      }
+    }
+    // URLオブジェクトの関数を実行
+    if (router.func !== undefined) router.func();
+  },
+
+  // URLナビゲーション機能
+  // Navi(URLオブジェクト, { プレイスホルダー名 : 値 }, URLのハッシュ)
+  Navi(route, bindValue = null, hash = '') {
+    let navigate = route.path;
+
+    // URLオブジェクトのパスにプレイスホルダーがあるか
+    if (navigate.indexOf(':') !== -1) {
+
+      // 引数bindValueまたは、 run()で取得していた値があるか
+      if (bindValue !== null || Object.keys(this.ID).length > 0) {
+
+        // 引数bindValueの値と、run()で取得していた値をマージする
+        let copyID = Object.assign({}, this.ID);
+        copyID = Object.assign(copyID, bindValue);
+
+        // pathに含まれるプレイスホルダーを値に置換する
+        let key = Object.keys(copyID);
+        let value = Object.values(copyID);
+        for (let i = 0, len = key.length; i < len; i++) {
+          navigate = navigate.replace(':' + key[i], value[i]);
+        }
+      } else {
+        alert('Missing ID');
+        return;
+      }
+      // プレイスホルダーが残っている場合
+      if (navigate.indexOf(':') !== -1) {
+        alert('Missing ID');
+        return;
+      }
+    }
+    //history.pushState(null, null, navigate + hash);
+    document.getElementById('URL').value = 'https://test.com' + navigate;
+    this.run();
+  },
+
+  notFound() {
+    alert('404');
+  }
+};
+
+// .root以下のオブジェクト階層でURLを定義をする
+Router.root = { // プロパティ名 = パス名
+  // ルートパス
+  path: '/',
+  // アクセス時に実行される関数
+  func: () => Content.innerHTML = `<h2>ホーム</h2>
+  <img src="https://1.bp.blogspot.com/-RE_LtIhPBps/VCOJt4M6ZEI/AAAAAAAAm1k/WGvtkInZP9s/s800/house_reform.png" height="200px">`
+};
+
+Router.root.page1 = {
+  path: '/page1',
+  func: () => Content.innerHTML = `<h2>ページ 1</h2>
+  <img src="https://1.bp.blogspot.com/-DRHWD7Jr4u8/X9WHA3lN4eI/AAAAAAABczA/JsX-EHcxM3so9Qtcy9G0K3CNGchbBIc5wCNcBGAsYHQ/s400/food_ramen_woman.png" height="200px">`
+};
+
+Router.root.page1['2'] = {
+  path: '/page1/2',
+  func: () => Content.innerHTML = `<h2>ページ 1-2</h2>
+  <img src="https://1.bp.blogspot.com/-HPG_x7XPky8/X-FctLTLkKI/AAAAAAABdEE/xs4T8m0FiBAFptXHGQhQ2c9ZmVWtaeQSgCNcBGAsYHQ/s1028/onepiece05_sanji.png" height="200px">`
+};
+
+// 動的なパスはanyPathにする
+Router.root.page1['2'].anyPath = {
+  // パスに:をつけるとプレイスホルダーになる
+  //（ナビゲーション機能を使う時、値に置換される）
+  path: '/page1/2/:page_id',
+  func: page2
+};
+
+// ルーター機能を起動
+Router.Start();
+
+
+function page2() {
+  if (Router.ID['page_id'] === '1234') {
+    Content.innerHTML = `<h2>ID ${Router.ID['page_id']}</h2>
+    <img src="https://1.bp.blogspot.com/-ZOg0qAG4ewU/Xub_uw6q0DI/AAAAAAABZio/MshyuVBpHUgaOKJtL47LmVkCf5Vge6MQQCNcBGAsYHQ/s1600/pose_pien_uruuru_woman.png" height="200px">`;
+  } else {
+    Content.innerHTML = `<h2>ID ${Router.ID['page_id']}</h2>
+    <img src="https://1.bp.blogspot.com/-jlZlCg-8FAM/Xub_u8HTD1I/AAAAAAABZis/ZhUI05AZBEQpVinedZ6Xy-eIucmNuY2SQCNcBGAsYHQ/s1600/pose_pien_uruuru_man.png" height="200px">`;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
