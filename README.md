@@ -1,6 +1,5 @@
 # Privacy Policy
 
-## chrome-extention-privacy-policy.github.io
-chrome-extention-privacy-policy
-https://mimimiku778.github.io/privacy/en.html
-https://mimimiku778.github.io/privacy/ja.html
+## Chrome Extension Privacy Policy
+- [EN: Chrome Extension Privacy Policy](https://mimimiku778.github.io/privacy/ja.html)
+- [JA: Chrome 拡張のプライバシーポリシー](https://mimimiku778.github.io/privacy/ja.html)
