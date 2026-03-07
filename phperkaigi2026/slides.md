@@ -29,6 +29,72 @@ style: |
   section.mid {
     font-size: 40px;
   }
+  section.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 60px 60px;
+  }
+  section.profile .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+  }
+  section.profile .left img.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  section.profile .left .name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 16px;
+    text-align: center;
+  }
+  section.profile .left .subname {
+    font-size: 20px;
+    color: #666;
+    text-align: center;
+  }
+  section.profile .right {
+    flex: 1;
+  }
+  section.profile .right img.logo {
+    height: 200px;
+    margin-bottom: 8px;
+  }
+  section.profile .right img.product {
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  section.profile-product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 48px;
+  }
+  section.profile-product .product-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+  }
+  section.profile-product .product-area img.product-img {
+    max-height: 560px;
+    max-width: 55%;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  section.profile-product .product-area .product-info {
+    flex: 1;
+  }
 ---
 
 <!-- HTML生成: npx @marp-team/marp-cli --no-stdin docs/slides.md --html -o docs/slides.html -->
@@ -51,7 +117,57 @@ style: |
 
 ---
 
-## Progateから独学で始めて、一応作れるようになった
+<!-- _class: profile -->
+
+<div class="left">
+<img class="avatar" src="./images/profile.jpg">
+<div class="name">pika | keita nemoto</div>
+</div>
+
+<div class="right">
+
+## 所属
+
+<img class="logo" src="./images/digital-circus-logo.png">
+
+デジタルサーカス株式会社
+エンジニア歴 1年半
+プログラミング歴 3年半
+
+</div>
+
+<!--
+「pikaです。デジタルサーカスでエンジニアをしています。プログラミング歴は3年半です」
+-->
+
+---
+
+<!-- _class: profile-product -->
+
+<div class="product-area">
+<img class="product-img" src="./images/openchat-graph.png">
+<div class="product-info">
+
+### 自作のプロダクト
+
+## オプチャグラフ
+LINEオープンチャットの
+グラフ可視化ツール
+
+月間アクティブユーザー 約2万人
+月間PV 約10万
+
+</div>
+</div>
+
+<!--
+「自作のプロダクトとして、オプチャグラフというLINEオープンチャットのグラフ可視化ツールを作っています。」
+-->
+
+---
+
+## オプチャグラフを作りたくて
+### Progateでプログラミングを始めた
 
 ```php
 class PostReview extends ApiAbstract
@@ -66,10 +182,10 @@ class PostReview extends ApiAbstract
 }
 ```
 
-newするだけで認証からレスポンスまで全部走る
+一応動くものは作れた。でもコンストラクタに全部詰め込んでいた
 
 <!--
-「Progateから始めて、掲示板が作れるようになりました。でも機能を足すたびにコードが絡まって、直そうとするともっと絡まる」
+「オプチャグラフを作りたくてProgateでPHPを始めました。一応動くものは作れたんですが、コンストラクタに処理を全部詰め込んでいて、機能を足すたびにコードが絡まっていきました」
 一拍
 -->
 
@@ -92,33 +208,24 @@ newするだけで認証からレスポンスまで全部走る
 
 <!-- _class: mid -->
 
-## QiitaでLaravelの記事を読んだ
+### QiitaでLaravelの記事を読んだ
 
 「こう書くとこう動く」は分かった
 
-### なぜそう書くのかは分からなかった
+#### なぜそう書くのかは分からなかった
+
+でもLaravelをそのまま使いたくなかった
+中身を理解しないまま使っても、同じことを繰り返すと思った
+
+#### Laravelの書き方だけ真似して、裏側は全部自分で作ることにした
 
 ちょうどその頃、ChatGPT（GPT-3.5）が出た
-
 ハルシネーションだらけだったが、壁打ち相手にはなった
 
 <!--
 「QiitaでLaravelの記事を読みました。こう書くとこう動くのは分かるんですが、なぜそう書くのかが分からなかった」
-「ちょうどその頃GPT-3.5が出まして、ハルシネーションだらけでしたけど壁打ち相手にはなりました」
-さくさく
--->
-
----
-
-<!-- _class: title -->
-
-## アプリケーションの処理自体は書ける
-## どう整理すればいいかが分からなかった
-
-### Laravelの使い方だけ見て、裏側を自分で作ることにした
-
-<!--
-「アプリケーションの処理自体は書けるんです。でもそれをどう整理すればいいかが分からなかった。それでLaravelの使い方だけ見て、裏側の仕組みを自分で作ることにしました」
+「でもLaravelをそのまま使いたくなかったんです。中身を理解しないまま使っても同じことを繰り返すと思って、書き方だけ真似して裏側は全部自分で作ることにしました」
+「ちょうどその頃GPT-3.5が出まして、壁打ち相手にはなりました」
 -->
 
 ---
@@ -131,66 +238,56 @@ app/Controllers/Pages/
     IndexPageController.php   ← / でアクセスされる
 ```
 
-ファイルを置くだけ。設定ファイルは0行
+URLとファイル名を対応させた。ファイルを置くだけ。設定ファイルは0行
 
 <!--
-「まず一番困っていたのは、どこに何を書くかでした。そこでURLとクラス名を対応させて、ファイルを置くだけでルーティングされるようにしました。設定ファイルは0行です」
+「まず一番困っていたのは、どこに何を書くかでした。最初は普通にURLごとに.phpファイルを置いていたんですが、そこから.htaccessでindex.phpにアクセスを集約させて、条件分岐で読み込むファイルを決める形にしました。それをさらに発展させて、URLとクラス名を対応させて、ファイルを置くだけでアクセスできるようにしました。設定ファイルは0行です」
 -->
 
 ---
 
 ## 次に、Laravelのコントローラを見て思った
 
-引数にクラスが並んでいる。手でnewしているわけじゃないらしい
+```php
+// 自分のコード: 使うクラスを毎回自分で生成して渡していた
+$db = new Database();
+$store = new ImageStore($db);
+$controller = new ImageController($store);
+```
+```php
+// Laravelのコード: 引数に型を書くだけで使える
+public function index(ImageStore $store) { ... }
+```
 
-便利だな。作りたい
+これは便利だ。自分でも作りたい
 
 <!--
-「次に、Laravelのコントローラを見たら、引数にクラスが並んでいて、手でnewしているわけじゃないらしい。これは便利だなと思って、自分でも作りたくなりました」
+「次にLaravelのコントローラを見たら、引数に型を書くだけでクラスが使えるようになっていたんです。自分のコードでは毎回new Databaseとかnew ImageStoreとか書いて渡していたので、これは便利だなと」
 -->
 
 ---
 
-## 型を書くだけで使える
+## 裏側で何をしているか
 
 ```php
-class ImagePageController {
-    public function __construct(ImageStore $store) {
-        // ↑ 型を見て自動で new して渡す
+function resolve(string $className): object {
+    $ref = new ReflectionClass($className);
+    $params = $ref->getConstructor()->getParameters();
+
+    $args = [];
+    foreach ($params as $param) {
+        $typeName = $param->getType()->getName();
+        $args[] = $this->resolve($typeName); // ★ 再帰
     }
+
+    return $ref->newInstanceArgs($args);
 }
-// 裏側: リフレクションで引数の型を読んで new する
+// ImageStore → Database → Config … 全部自動で生成される
 ```
 
-手でnewしなくていい
-
 <!--
-「引数の型を自動で読み取る方法はないかとChatGPTに聞いたところ、リフレクションというものがあると教えてくれました。これで何でもできるなと思いました」
-さっと
--->
-
----
-
-## ある日気づいた
-
-```php
-class ImageStore {
-    public function __construct(Database $db) { ... }
-}
-class Database {
-    public function __construct(Config $config) { ... }
-}
-// リフレクションを再帰にしただけで
-// ImageStore → Database → Config 全部自動でnewされる
-```
-
-1行変えただけだった
-
-**問題が、仕組みを教えてくれた**
-
-<!--
-「それまでは1つのクラスに別のクラスを注入しているだけで、その先の依存までは考えが及んでいませんでした。しかしあるとき、クラスが大きくなりすぎたので分割したいと思ったんです。そこで依存がすべて自動で解決されたら便利だなと考えて、再帰にすればいいだけだと気づきました」
-「1行変えただけで全部自動で解決されました」←力入れる
+「ChatGPTにリフレクションというものを教えてもらって、引数の型を読み取れるようになりました。最初は1つのクラスを渡すだけだったんですが、クラスが大きくなって分割したいと思ったとき、再帰にすればいいだけだと気づきました」
+「1行変えただけで、芋づる式に全部自動で生成されるようになりました」←力入れる
 ぼそっと「問題が、仕組みを教えてくれた」★1回目
 -->
 
@@ -200,7 +297,7 @@ class Database {
 
 # できた
 
-MVC / ルーティング / DIコンテナ / バリデーション
+URL対応 / 自動クラス生成 / バリデーション
 CSRF対策 / 自動XSSエスケープ / ヘルパー関数
 
 外部ライブラリ依存ゼロ
@@ -212,69 +309,58 @@ CSRF対策 / 自動XSSエスケープ / ヘルパー関数
 
 ---
 
-## こう書くだけで動く
+### こう定義すると
 
 ```php
-Route::path('image/store@post')           // POST /image/store
-    ->matchFile('file', ['image/jpeg'])   // 画像だけ許可
-    ->matchStr('imageType', regex: '/.+/')// 文字列チェック
-    ->matchNum('imageSize', max: 1000);   // 数値の範囲チェック
+Route::path('image/store@post')            // POST /image/store
+    ->matchFile('file', ['image/jpeg'])    // 画像だけ許可
+    ->matchNum('imageSize', max: 1000);    // 数値の範囲チェック
 ```
 
-ルーティング、バリデーション、エラー処理。これだけ。
-
-<!--
-「こう書くだけでルーティング、バリデーション、エラー処理が全部動きます」
-さっと
--->
-
----
-
-## 全部合わさるとこうなる
+### このコントローラが呼ばれる
 
 ```php
-public function store(
-    GdImageFactoryInterface $image,  // 自動注入
-    ImageStoreInterface $store,      // 自動注入
-    array $file,                     // バリデーション済み
-    string $imageType,               // バリデーション済み
-) {
-    // やりたいことだけ書く
-}
+class ImageApiController
+{
+    public function store(
+        GdImageFactoryInterface $image,  // 自動で生成される
+        ImageStoreInterface $store,      // 自動で生成される
+        array $file,                     // バリデーション済み
+        int $imageSize                   // バリデーション済み
+    ) {
+        // やりたいことだけ書く
 ```
 
-設定ファイルなし、newなし
-
 <!--
-「全部合わさるとこうなります。設定ファイルなし、newなし。やりたいことだけ書けばいい」
+「こう定義すると、このコントローラが呼ばれます。クラスは自動でインスタンス化されて、値はバリデーション済み。やりたいことだけ書けばいい」
 一拍
 -->
 
 ---
 
-<!-- _class: title -->
+<!-- _class: profile-product -->
+
+<div class="product-area">
+<img class="product-img" src="./images/openchat-graph.png">
+<div class="product-info">
 
 ## このフレームワークで
-## 実際にWebサービスを作って公開した
+## オプチャグラフを作って公開した
 
-<!--
-「このフレームワークで実際にWebサービスを作って公開しました」
-さっと
--->
+LINEオープンチャットの
+グラフ可視化ツール
 
----
+月間アクティブユーザー 約2万人
+月間PV 約10万
 
-## 今も動いている
-
-コントローラ 41個 / モデル 145個 / サービス 143個
-
+コントローラ 41個 / モデル 145個
 コミット 3,300+ / PR 233本
 
-今もユーザーがいる実サービス
+</div>
+</div>
 
 <!--
-「今も動いています」
-数字はスライドに任せる
+「このフレームワークでオプチャグラフを作って公開しました。今も動いています」
 -->
 
 ---
@@ -291,6 +377,8 @@ public function store(
 ---
 
 ## 自分が作ったもの、全部名前がついていた
+
+「index.phpから条件分岐で読み込む」の答え →「ルーティング」と呼ばれていた
 
 「どこに何を書くか」の答え → 「設定より規約」と呼ばれていた
 Convention over Configuration
