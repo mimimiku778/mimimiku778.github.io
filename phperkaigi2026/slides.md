@@ -97,7 +97,7 @@ style: |
   }
 ---
 
-<!-- HTML生成: npx @marp-team/marp-cli --no-stdin docs/slides.md --html -o docs/slides.html -->
+<!-- HTML生成: npx @marp-team/marp-cli --no-stdin phperkaigi2026/slides.md --html -o phperkaigi2026/slides.html -->
 
 <!-- _class: title -->
 
