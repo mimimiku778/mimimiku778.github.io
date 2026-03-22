@@ -294,7 +294,7 @@ public function index(ImageStore $store) { ... }
 
 # できた
 
-URL対応 / 自動インスタンス化 / バリデーション
+URL振り分け / 自動インスタンス化 / バリデーション
 CSRF対策 / 自動XSSエスケープ / ヘルパー関数
 
 外部ライブラリ依存ゼロ
