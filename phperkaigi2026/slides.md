@@ -99,20 +99,6 @@ style: |
 
 <!-- HTML生成: npx @marp-team/marp-cli --no-stdin phperkaigi2026/slides.md --html -o phperkaigi2026/slides.html -->
 
-<!-- _class: title -->
-
-# いらないものを消したら<br>フレームワークができた話
-
-<br>
-
-## pika
-
-<!--
-
--->
-
----
-
 <!-- _class: profile -->
 
 <div class="left">
@@ -144,7 +130,7 @@ style: |
 ## ユーザーが自由に投稿できるサービスを作りたかった
 <div style="position: absolute; bottom: 60px; left: 60px; display: flex; align-items: flex-start; gap: 16px;">
 <img src="./images/openchat-logo.png" style="width: 80px; border-radius: 16px;">
-<span style="font-size: 0.4em; text-align: left;">LINEオープンチャットは<br>LINE上の匿名グループチャット機能です！</span>
+<span style="font-size: 1.5rem; text-align: left;">LINEオープンチャットは<br>LINEアプリの匿名グループチャット機能です！</span>
 </div>
 
 <!--
