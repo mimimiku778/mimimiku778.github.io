@@ -155,10 +155,10 @@ style: |
 
 ## 自分で作るしかない
 
-### Progateでプログラミングを始めた
+### ProgateでPHP・SQL・HTML・JavaScriptを8日で終わらせた
 
 <!--
-「自分で作るしかないと思って、Progateでプログラミングを始めました」
+「自分で作るしかないと思って、Progateで基本を学びました。PHP、SQL、HTML、JavaScriptのコースを8日で終わらせました」
 -->
 
 ---
