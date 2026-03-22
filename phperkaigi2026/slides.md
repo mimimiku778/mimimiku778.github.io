@@ -296,6 +296,7 @@ public function index(ImageStore $store) { ... }
 
 ルーティングと自動インスタンス化 / バリデーション
 CSRF対策 / 自動XSSエスケープ / ヘルパー関数 / ファサード
+クッキー / セッション管理 / Requestオブジェクト
 
 外部ライブラリ依存ゼロ
 
