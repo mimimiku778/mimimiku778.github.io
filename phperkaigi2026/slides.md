@@ -158,7 +158,7 @@ style: |
 ### ProgateでPHP・SQL・HTML・JavaScriptを8日で終わらせた
 
 <!--
-「自分で作るしかないと思って、Progateで基本を学びました。PHP、SQL、HTML、JavaScriptのコースを8日で終わらせました」
+「自分で作るしかないと思って、Progateで基本を学びました」
 -->
 
 ---
