@@ -247,28 +247,41 @@ class PostReview extends ApiAbstract
 
 ## まず困っていたのは「どこに何を書くか」
 
+```php
+// メソッドに分割してみた
+// でもいろんな箇所から参照されて、どこで使われているか分からなくなった
+class ImageService
+{
+    public function resize() { ... }
+    public function validate() { ... }  // ← どこから呼ばれてる？
+    public function store() { ... }     // ← ここでも使ってる？
+}
 ```
-app/Controllers/Pages/
-    ImagePageController.php   ← /image でアクセスされる
-    IndexPageController.php   ← / でアクセスされる
-```
-
-URLとファイル名を対応させた。ファイルを置くだけ。設定ファイルは0行
 
 <!--
-「まず一番困っていたのは、どこに何を書くかでした。最初は普通にURLごとに.phpファイルを置いていたんですが、そこから.htaccessでindex.phpにアクセスを集約させて、条件分岐で読み込むファイルを決める形にしました。それをさらに発展させて、URLとクラス名を対応させて、ファイルを置くだけでアクセスできるようにしました。設定ファイルは0行です」
+「まず困っていたのは、どこに何を書くかでした。メソッドに分割してまとめてみたんですが、いろんな箇所から参照されて、どこで使われているのか分からなくなりました」
 -->
 
 ---
 
-## 次に、Laravelのコントローラを見て思った
+## じゃあクラスに分けよう
 
 ```php
-// 自分のコード: 使うクラスを毎回自分で生成して渡していた
+// 役割ごとにクラスを分けた
+// でも今度はnewで全部自分で繋がないといけない
 $db = new Database();
 $store = new ImageStore($db);
 $controller = new ImageController($store);
 ```
+
+<!--
+「じゃあクラスに分けようと。役割ごとにクラスを分けたんですが、今度はnewで全部自分で繋がないといけなくなりました」
+-->
+
+---
+
+## そこでLaravelのコントローラを見て思った
+
 ```php
 // Laravelのコード: 引数に型を書くだけで使える
 public function index(ImageStore $store) { ... }
@@ -277,7 +290,7 @@ public function index(ImageStore $store) { ... }
 これは便利だ。自分でも作りたい
 
 <!--
-「次にLaravelのコントローラを見たら、引数に型を書くだけでクラスが使えるようになっていたんです。自分のコードでは毎回new Databaseとかnew ImageStoreとか書いて渡していたので、これは便利だなと」
+「そこでLaravelのコントローラを見たら、引数に型を書くだけでクラスが使えるようになっていたんです。これは便利だなと」
 -->
 
 ---
