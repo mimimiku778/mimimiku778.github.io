@@ -142,8 +142,10 @@ style: |
 
 ## LINEオープンチャットの部屋の評判を
 ## ユーザーが自由に投稿できるサービスを作りたかった
-
-<img src="./images/openchat-logo.png" width="48" style="vertical-align: middle;"> LINEオープンチャット：LINE上の匿名グループチャット機能
+<div style="position: absolute; bottom: 60px; left: 60px; display: flex; align-items: flex-start; gap: 16px;">
+<img src="./images/openchat-logo.png" style="width: 80px; border-radius: 16px;">
+<span style="font-size: 0.4em; text-align: left;">LINEオープンチャットは<br>LINE上の匿名グループチャット機能です！</span>
+</div>
 
 <!--
 「LINEのオープンチャットの評判を、ユーザーが自由に投稿できるサービスを作りたかったんです」
