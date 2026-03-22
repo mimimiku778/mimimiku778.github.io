@@ -288,28 +288,14 @@ public function index(ImageStore $store) { ... }
 
 ---
 
-## 裏側で何をしているか
+<!-- _class: big -->
 
-```php
-function resolve(string $className): object {
-    $ref = new ReflectionClass($className);
-    $params = $ref->getConstructor()->getParameters();
+## DIもルーティングもセキュリティも
 
-    $args = [];
-    foreach ($params as $param) {
-        $typeName = $param->getType()->getName();
-        $args[] = $this->resolve($typeName); // ★ 再帰
-    }
-
-    return $ref->newInstanceArgs($args);
-}
-// ImageStore → Database → Config … 全部自動で生成される
-```
+### 欲しい機能はすべて原理を調べて一から実装した
 
 <!--
-「ChatGPTにリフレクションというものを教えてもらって、引数の型を読み取れるようになりました。最初は1つのクラスを渡すだけだったんですが、クラスが大きくなって分割したいと思ったとき、再帰にすればいいだけだと気づきました」
-「1行変えただけで、芋づる式に全部自動で生成されるようになりました」←力入れる
-ぼそっと「問題が、仕組みを教えてくれた」★1回目
+「DIもルーティングもセキュリティ対策も、欲しい機能はすべて原理を調べて一から実装しました」
 -->
 
 ---
