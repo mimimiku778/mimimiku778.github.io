@@ -248,11 +248,10 @@ class PostReview extends ApiAbstract
 ## まず困っていたのは「どこに何を書くか」
 
 ```php
-$img = new ImageService();
-$img->validate();          // ← ここでも呼んでる
-$db->insert($img->store(), $user->getId(), $img->resize());
-$logger->log($img->validate());  // ← さっきも呼んだ？
-$mail->send($user->getEmail(), $img->store()); // ← またstore？
+$img->validate();
+$db->insert($img->store(), $img->resize());
+$logger->log($img->validate());  // さっきも呼んだ？
+$mail->send($img->store());      // またstore？
 ```
 
 <!--
