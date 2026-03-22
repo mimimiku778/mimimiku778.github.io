@@ -248,19 +248,15 @@ class PostReview extends ApiAbstract
 ## まず困っていたのは「どこに何を書くか」
 
 ```php
-// クラスを作って機能ごとにメソッドに分割した
-// でもこれは関数を細切れにして並べただけ
-// 無秩序にいろんな箇所から参照される → スパゲティ
-class ImageService
-{
-    public function resize() { ... }
-    public function validate() { ... }  // ← どこから呼ばれてる？
-    public function store() { ... }     // ← ここでも使ってる？
-}
+$img = new ImageService();
+$img->validate();          // ← ここでも呼んでる
+$db->insert($img->store(), $user->getId(), $img->resize());
+$logger->log($img->validate());  // ← さっきも呼んだ？
+$mail->send($user->getEmail(), $img->store()); // ← またstore？
 ```
 
 <!--
-「まず困っていたのは、どこに何を書くかでした。クラスを作って機能ごとにメソッドに分割してみたんですが、実際はこれって関数を細切れにして並べただけなんですよね。それが無秩序にいろんな箇所から参照されている。これがスパゲティです」
+「まず困っていたのは、どこに何を書くかでした。メソッドに分割してみたんですが、あちこちから呼ばれて絡まっていく。これがスパゲティです」
 -->
 
 ---
